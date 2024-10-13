@@ -1,7 +1,7 @@
 import numpy as np
 import os
 
-class fc_sigmoid:
+class fc_softmax:
 
     def __init__(self, in_channels, out_channels):
         self.in_channels = in_channels
@@ -476,7 +476,7 @@ class resnet9_numpy:
         ]
         self.layer3 = [ResBlock(256, 256, stride=1, shortcut=None)]
         self.max_pooling = max_pooling(2,2,2,same=True)
-        self.fc = fc_sigmoid(256, num_classes)
+        self.fc = fc_softmax(256, num_classes)
 
     def train(self):
         for l in self.layer0:
