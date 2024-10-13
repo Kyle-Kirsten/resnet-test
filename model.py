@@ -37,7 +37,7 @@ class ResidualBlock(nn.Module):
             residual = self.downsample(residual)
 
         out = self.relu(out)
-        out += residual
+        out = out + residual
         return out
 
 
@@ -49,7 +49,7 @@ class Net(nn.Module):
         super(Net, self).__init__()
 
         self.conv = nn.Sequential(
-            nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.Conv2d(in_channels=1, out_channels=64, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm2d(num_features=64, momentum=0.9),
             nn.ReLU(inplace=True),
             nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1, bias=False),
@@ -69,7 +69,7 @@ class Net(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2),
         )
 
-        self.fc = nn.Linear(in_features=1024, out_features=10, bias=True)
+        self.fc = nn.Linear(in_features=256, out_features=10, bias=True)
 
     def forward(self, x):
         out = self.conv(x)
